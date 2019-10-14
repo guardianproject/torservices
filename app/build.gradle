@@ -11,17 +11,24 @@ def getVersionName = { ->
 }
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "org.torproject.torservices"
-        minSdkVersion 18
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName getVersionName()
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        /*
+          The Android Testing Support Library collects analytics to continuously improve the testing
+          experience. More specifically, it uploads a hash of the package name of the application
+          under test for each invocation. If you do not wish to upload this data, you can opt-out by
+          passing the following argument to the test runner: disableAnalytics "true".
+         */
+        testInstrumentationRunnerArguments disableAnalytics: 'true'
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,13 +38,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: '../../tor-android/tor-android-binary/build/outputs/aar', include: ['*.aar'])
+    implementation fileTree(dir: '../../jtorctl/build/libs', include: ['jtorctl-*.jar'])
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'info.guardianproject.netcipher:netcipher:2.1.0'
     androidTestImplementation 'commons-io:commons-io:2.6'
     androidTestImplementation 'commons-net:commons-net:3.6'
 }
