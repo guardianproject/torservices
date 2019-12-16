@@ -13,4 +13,16 @@
     <string name="pref_use_persistent_notifications_summary">
         Always keep the icon in toolbar when Orbot is connected
     </string>
+
+    <string name="unknown">Unknown</string>
+    <string name="about_title">About TorServices</string>
+    <string name="about_version">Version</string>
+    <string name="tor_version">Tor Version</string>
+    <string name="jtorctl_version">jtorctl version</string>
+    <string name="about_site">Website</string>
+    <string name="about_forum">Support forum</string>
+    <string name="about_source">Source code</string>
+    <string name="about_license">License</string>
+    <string name="license_gplv3_later">GNU General Public License version\u00A03 or later</string>
+
 </resources>
