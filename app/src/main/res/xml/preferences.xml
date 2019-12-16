@@ -1,0 +1,16 @@
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_allow_background_starts"
+            android:title="@string/pref_allow_background_starts_title"
+            android:summary="@string/pref_allow_background_starts_summary"/>
+
+    <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_persistent_notifications"
+            android:title="@string/pref_use_persistent_notifications_title"
+            android:summary="@string/pref_use_persistent_notifications_summary"/>
+
+</PreferenceScreen>
