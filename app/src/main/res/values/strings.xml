@@ -9,6 +9,8 @@
     <string name="pref_allow_background_starts_summary">
         Let any app tell Orbot to start Tor and related services
     </string>
+    <string name="pref_start_on_boot_title">Start Tor on Boot</string>
+    <string name="pref_start_on_boot_summary">Automatically start and connect Tor when this device boots</string>
     <string name="pref_use_persistent_notifications_title">Always-on notifications</string>
     <string name="pref_use_persistent_notifications_summary">
         Always keep the icon in toolbar when Orbot is connected

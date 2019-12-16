@@ -35,6 +35,15 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".OnBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <!-- HTC did something weird https://github.com/OneBusAway/onebusaway-android/issues/934 -->
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
