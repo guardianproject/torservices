@@ -18,6 +18,12 @@ import org.torproject.jni.TorService;
  */
 public class StartReceiver extends BroadcastReceiver {
 
+    /**
+     * If the user has disabled auto-starts, the requesting app will receive
+     * this reply.  This matches the constant from Orbot and NetCipher.
+     */
+    private static final String STATUS_STARTS_DISABLED = "STARTS_DISABLED";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
@@ -39,7 +45,7 @@ public class StartReceiver extends BroadcastReceiver {
             } else if (!TextUtils.isEmpty(packageName)) {
                 // let the requesting app know that the user has disabled starting via Intent
                 Intent startsDisabledIntent = new Intent(TorService.ACTION_STATUS);
-                startsDisabledIntent.putExtra(TorService.EXTRA_STATUS, TorService.STATUS_STARTS_DISABLED);
+                startsDisabledIntent.putExtra(TorService.EXTRA_STATUS, STATUS_STARTS_DISABLED);
                 startsDisabledIntent.setPackage(packageName);
                 context.sendBroadcast(startsDisabledIntent);
             }
