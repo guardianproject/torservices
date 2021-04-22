@@ -21,8 +21,9 @@
             android:summary="@string/pref_start_on_boot_summary"/>
 
     <SwitchPreference
-            android:defaultValue="false"
-            android:key="pref_persistent_notifications"
+            android:defaultValue="true"
+            android:enabled="false"
+            android:key="pref_use_persistent_notifications"
             android:title="@string/pref_use_persistent_notifications_title"
             android:summary="@string/pref_use_persistent_notifications_summary"/>
 

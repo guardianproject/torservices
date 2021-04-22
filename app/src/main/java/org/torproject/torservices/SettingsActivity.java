@@ -1,16 +1,43 @@
 package org.torproject.torservices;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
+
+import androidx.core.app.NotificationManagerCompat;
 
 public class SettingsActivity extends Activity {
+
+    static final String PREF_USE_PERSISTENT_NOTIFICATIONS = "pref_use_persistent_notifications";
 
     public static class MySettingsFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+            SwitchPreference usePersistentNotification = (SwitchPreference) findPreference(
+                    PREF_USE_PERSISTENT_NOTIFICATIONS);
+            usePersistentNotification.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object enabled) {
+                    // TODO put up/take down notification, e.g. set foreground
+                    if (Build.VERSION.SDK_INT < 26) {
+                        if ((Boolean) enabled) {
+                            App.startTorServiceForeground(getActivity());
+                        } else {
+                            NotificationManagerCompat.from(getActivity()).cancelAll();
+                        }
+                    }
+                    return true;
+                }
+            });
+            if (Build.VERSION.SDK_INT >= 26) {
+                usePersistentNotification.setChecked(true);
+                usePersistentNotification.setEnabled(false);
+            }
         }
     }
 

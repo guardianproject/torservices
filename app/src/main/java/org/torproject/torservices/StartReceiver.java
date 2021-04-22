@@ -5,11 +5,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import org.torproject.jni.TorService;
 
+import androidx.core.content.ContextCompat;
 /**
  * Processes {@link Intent}s from apps that are requesting Tor proxying,
  * including replying to the apps when the user has disabled automatic
@@ -36,9 +36,8 @@ public class StartReceiver extends BroadcastReceiver {
                 if (packageName != null) {
                     startTorIntent.putExtra(TorService.EXTRA_PACKAGE_NAME, packageName);
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-                        && prefs.getBoolean("pref_persistent_notifications", false)) {
-                    context.startForegroundService(startTorIntent);
+                if (App.useForeground(context)) {
+                    ContextCompat.startForegroundService(context, startTorIntent);
                 } else {
                     context.startService(startTorIntent);
                 }
