@@ -27,6 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AboutActivity"/>
+        <activity
+            android:name=".WakeUpActivity"
+            android:exported="true" />
 
         <service android:name="org.torproject.jni.TorService"/>
 

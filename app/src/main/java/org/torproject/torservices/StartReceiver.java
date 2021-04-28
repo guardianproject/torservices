@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import org.torproject.jni.TorService;
 
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 /**
  * Processes {@link Intent}s from apps that are requesting Tor proxying,
  * including replying to the apps when the user has disabled automatic
@@ -18,11 +19,19 @@ import androidx.core.content.ContextCompat;
  */
 public class StartReceiver extends BroadcastReceiver {
 
+    public static final String TAG = "StartReceiver";
+
     /**
      * If the user has disabled auto-starts, the requesting app will receive
      * this reply.  This matches the constant from Orbot and NetCipher.
      */
     private static final String STATUS_STARTS_DISABLED = "STARTS_DISABLED";
+
+    public static final void start(Context context) {
+        Intent intent = new Intent(TorService.ACTION_START);
+        intent.setClass(context, StartReceiver.class);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
