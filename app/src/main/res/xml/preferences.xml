@@ -1,25 +1,24 @@
-<PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference android:key="pref_about" />
 
     <SwitchPreference
-            android:defaultValue="true"
-            android:key="pref_allow_background_starts"
-            android:title="@string/pref_allow_background_starts_title"
-            android:summary="@string/pref_allow_background_starts_summary"/>
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="pref_allow_background_starts"
+        android:summary="@string/pref_allow_background_starts_summary"
+        android:title="@string/pref_allow_background_starts_title" />
 
     <SwitchPreference
-            android:defaultValue="true"
-            android:key="pref_start_on_boot"
-            android:title="@string/pref_start_on_boot_title"
-            android:summary="@string/pref_start_on_boot_summary"/>
+        android:defaultValue="true"
+        android:key="pref_start_on_boot"
+        android:summary="@string/pref_start_on_boot_summary"
+        android:title="@string/pref_start_on_boot_title" />
 
     <SwitchPreference
-            android:defaultValue="true"
-            android:enabled="false"
-            android:key="pref_use_persistent_notifications"
-            android:title="@string/pref_use_persistent_notifications_title"
-            android:summary="@string/pref_use_persistent_notifications_summary"/>
+        android:defaultValue="true"
+        android:key="pref_use_persistent_notifications"
+        android:summary="@string/pref_use_persistent_notifications_summary"
+        android:title="@string/pref_use_persistent_notifications_title" />
 
 </PreferenceScreen>

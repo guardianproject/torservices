@@ -1,106 +1,110 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingTop="4dp"
+        android:paddingRight="24dp">
+
+        <TextView
+            style="@android:style/TextAppearance.Material.Caption"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:paddingTop="4dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:text="@string/about_version" />
 
         <TextView
-                android:text="@string/about_version"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Caption"/>
-        <TextView
-                android:id="@+id/version"
-                android:text="@string/unknown"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Body1"/>
+            android:id="@+id/version"
+            style="@android:style/TextAppearance.Material.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/unknown" />
 
         <TextView
-                android:text="@string/tor_version"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Caption"/>
-        <TextView
-                android:id="@+id/tor_version"
-                android:text="@string/unknown"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Body1"/>
+            style="@android:style/TextAppearance.Material.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tor_version" />
 
         <TextView
-                android:text="@string/jtorctl_version"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Caption"/>
-        <TextView
-                android:id="@+id/jtorctl_version"
-                android:text="@string/unknown"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Body1"/>
+            android:id="@+id/tor_version"
+            style="@android:style/TextAppearance.Material.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/unknown" />
 
         <TextView
-                android:text="@string/about_site"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Caption"/>
-        <TextView
-                android:text="@string/site_link"
-                android:autoLink="web"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Body1"/>
+            style="@android:style/TextAppearance.Material.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/jtorctl_version" />
 
         <TextView
-                android:text="@string/about_source"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Caption"/>
-        <TextView
-                android:text="@string/source_link"
-                android:autoLink="web"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Body1"/>
+            android:id="@+id/jtorctl_version"
+            style="@android:style/TextAppearance.Material.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/unknown" />
 
         <TextView
-                android:text="@string/about_license"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Caption"/>
+            style="@android:style/TextAppearance.Material.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_site" />
+
         <TextView
-                android:text="@string/license_gplv3_later"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/TextAppearance.Material.Body1"/>
+            style="@android:style/TextAppearance.Material.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoLink="web"
+            android:text="@string/site_link" />
+
+        <TextView
+            style="@android:style/TextAppearance.Material.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_source" />
+
+        <TextView
+            style="@android:style/TextAppearance.Material.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoLink="web"
+            android:text="@string/source_link" />
+
+        <TextView
+            style="@android:style/TextAppearance.Material.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about_license" />
+
+        <TextView
+            style="@android:style/TextAppearance.Material.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/license_gplv3_later" />
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginTop="12dp"
-                android:paddingBottom="16dp"
-                android:clipToPadding="false">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:minWidth="100dp"
-                    android:layout_height="wrap_content"
-                    style="@android:style/Widget.Material.ActionButton"
-                    android:id="@+id/ok_button"
-                    android:text="@android:string/ok"/>
+                android:id="@+id/ok_button"
+                style="@android:style/Widget.Material.ActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
+                android:text="@android:string/ok" />
 
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>
