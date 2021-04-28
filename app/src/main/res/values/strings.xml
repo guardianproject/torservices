@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">TorServices</string>
 
-    <string name="pref_start_boot_title">Start Tor on boot</string>
-    <string name="pref_start_boot_summary">Automatically start TorServices and connect Tor once this device has started</string>
     <string name="pref_allow_background_starts_title">Allow background starts</string>
     <string name="pref_allow_background_starts_summary">Let any app start Tor and related services</string>
     <string name="pref_start_on_boot_title">Start Tor on Boot</string>

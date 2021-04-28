@@ -4,7 +4,6 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:enabled="false"
         android:key="pref_allow_background_starts"
         android:summary="@string/pref_allow_background_starts_summary"
         android:title="@string/pref_allow_background_starts_title" />

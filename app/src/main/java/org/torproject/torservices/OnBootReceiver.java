@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import org.torproject.jni.TorService;
 
 /**
@@ -24,8 +25,8 @@ public class OnBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        if (prefs.getBoolean("pref_start_on_boot", false)) {
-            TorService.start(context);
+        if (prefs.getBoolean(SettingsActivity.PREF_START_ON_BOOT, false)) {
+            StartReceiver.start(context);
         }
     }
 }
