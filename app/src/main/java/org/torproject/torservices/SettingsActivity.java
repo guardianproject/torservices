@@ -7,10 +7,13 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 
+import org.torproject.jni.TorService;
+
 import androidx.core.app.NotificationManagerCompat;
 
 public class SettingsActivity extends Activity {
 
+    static final String PREF_ABOUT = "pref_about";
     static final String PREF_USE_PERSISTENT_NOTIFICATIONS = "pref_use_persistent_notifications";
 
     public static class MySettingsFragment extends PreferenceFragment {
@@ -18,6 +21,10 @@ public class SettingsActivity extends Activity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+
+            String about = String.format("v%s with tor v%s", BuildConfig.VERSION_NAME, TorService.VERSION_NAME);
+            findPreference(PREF_ABOUT).setTitle(about);
+
             SwitchPreference usePersistentNotification = (SwitchPreference) findPreference(
                     PREF_USE_PERSISTENT_NOTIFICATIONS);
             usePersistentNotification.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
