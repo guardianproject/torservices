@@ -3,7 +3,6 @@ package org.torproject.torservices;
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import hugo.weaving.DebugLog;
 
 public class SettingsActivity extends Activity {
 
@@ -15,7 +14,6 @@ public class SettingsActivity extends Activity {
         }
     }
 
-    @DebugLog
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
