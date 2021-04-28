@@ -39,6 +39,11 @@ android {
         }
     }
 
+    // ensure reproducible builds https://f-droid.org/docs/Reproducible_Builds/#png-crushcrunch
+    aaptOptions {
+        cruncherEnabled = false
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
