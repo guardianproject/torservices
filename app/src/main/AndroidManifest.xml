@@ -50,6 +50,12 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name=".WakeUpService"
+            android:exported="true"
+            android:process=":WakeUpService"
+            tools:ignore="ExportedActivity" />
+
     </application>
 
 </manifest>
