@@ -84,7 +84,7 @@ public class App extends Application {
                 .setContentTitle(context.getString(R.string.notification_title))
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(exitIntent)
                 .setOngoing(true);
         if (Build.VERSION.SDK_INT >= 26) {
