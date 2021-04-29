@@ -15,6 +15,7 @@ public class SettingsActivity extends Activity {
 
     static final String PREF_ABOUT = "pref_about";
     static final String PREF_USE_PERSISTENT_NOTIFICATIONS = "pref_use_persistent_notifications";
+    static final String PREF_ALLOW_BACKGROUND_STARTS = "pref_allow_background_starts";
     static final String PREF_START_ON_BOOT = "pref_start_on_boot";
 
     public static class MySettingsFragment extends PreferenceFragment {

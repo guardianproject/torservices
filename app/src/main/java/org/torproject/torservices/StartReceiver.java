@@ -39,7 +39,7 @@ public class StartReceiver extends BroadcastReceiver {
         if (TextUtils.equals(action, TorService.ACTION_START)) {
             String packageName = intent.getStringExtra(TorService.EXTRA_PACKAGE_NAME);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            if (prefs.getBoolean("pref_allow_background_starts", true)) {
+            if (prefs.getBoolean(SettingsActivity.PREF_ALLOW_BACKGROUND_STARTS, true)) {
                 Intent startTorIntent = new Intent(context, TorService.class);
                 startTorIntent.setAction(action);
                 if (packageName != null) {
