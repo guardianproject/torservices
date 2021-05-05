@@ -13,8 +13,11 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.util.Log;
+
+import net.freehaven.tor.control.RawEventListener;
+import net.freehaven.tor.control.TorControlConnection;
 
 import org.torproject.jni.TorService;
 
@@ -22,22 +25,25 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.PreferenceManager;
 
 public class App extends Application {
 
     private static final String TAG = "App";
 
+    static LocalBroadcastManager localBroadcastManager;
     static TorService torService;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         Intent startTorIntent = new Intent(this, TorService.class);
         startTorIntent.setAction(TorService.ACTION_START);
         if (useForeground(this)) {
             ContextCompat.startForegroundService(this, startTorIntent);
         } else {
-            LocalBroadcastManager.getInstance(this).sendBroadcast(startTorIntent);
+            localBroadcastManager.sendBroadcast(startTorIntent);
         }
 
         bindService(
@@ -55,6 +61,25 @@ public class App extends Application {
                         torService = ((TorService.LocalBinder) iBinder).getService();
                         if (useForeground(torService)) {
                             startTorServiceForeground(torService);
+                        }
+                        try {
+                            TorControlConnection connection = null;
+                            do {
+                                // TODO this should not be here, TorService should give this in a callback
+                                Thread.sleep(100);
+                                connection = torService.getTorControlConnection();
+                            } while (connection == null);
+                            connection.addRawEventListener(new RawEventListener() {
+                                @Override
+                                public void onEvent(String keyword, String data) {
+                                    Log.i(TAG, keyword + "--" + data);
+                                    Intent intent = new Intent(keyword);
+                                    intent.putExtra(keyword, data);
+                                    localBroadcastManager.sendBroadcast(intent);
+                                }
+                            });
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
 
@@ -99,7 +124,7 @@ public class App extends Application {
         else
         {
             exitIntent = PendingIntent.getActivity(context,
-                    0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                    0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, packageName)

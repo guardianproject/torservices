@@ -3,6 +3,9 @@ package org.torproject.torservices;
 import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -10,8 +13,11 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
+
+import net.freehaven.tor.control.TorControlCommands;
 
 import org.torproject.jni.TorService;
 
@@ -50,6 +56,22 @@ public class SettingsActivity extends AppCompatActivity {
                 usePersistentNotification.setChecked(true);
                 usePersistentNotification.setEnabled(false);
             }
+            final Preference statusPreference = findPreference("pref_status");
+            broadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    String data = intent.getStringExtra(intent.getAction());
+                    statusPreference.setTitle(data);
+                }
+            };
+            App.localBroadcastManager.registerReceiver(broadcastReceiver,
+                    new IntentFilter(TorControlCommands.EVENT_CIRCUIT_STATUS));
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            App.localBroadcastManager.unregisterReceiver(broadcastReceiver);
         }
     }
 
