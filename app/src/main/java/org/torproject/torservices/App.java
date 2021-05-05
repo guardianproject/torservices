@@ -42,8 +42,12 @@ public class App extends Application {
         bindService(
                 startTorIntent,
                 new ServiceConnection() {
+
+                    private IBinder iBinder;
+
                     @Override
                     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                        this.iBinder = iBinder;
                         if (!(iBinder instanceof TorService.LocalBinder)) {
                             return;
                         }
@@ -55,7 +59,9 @@ public class App extends Application {
 
                     @Override
                     public void onServiceDisconnected(ComponentName componentName) {
-                        NotificationManagerCompat.from(App.this).cancelAll();
+                        if (iBinder instanceof TorService.LocalBinder) {
+                            NotificationManagerCompat.from(App.this).cancelAll();
+                        }
                     }
                 },
                 0);

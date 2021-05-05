@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
         findViewById(R.id.statusButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                webView.loadUrl("about:blank");
+                statusTextView.setText("...");
                 OrbotHelper.requestStartTor(getApplicationContext());
             }
         });
@@ -69,7 +71,11 @@ public class MainActivity extends Activity {
                     @Override
                     public void run() {
                         statusTextView.setText("Tor status: " + status);
-                        webView.loadUrl("https://check.torproject.org/");
+                        if (OrbotHelper.STATUS_ON.equals(status)) {
+                            webView.loadUrl("https://check.torproject.org/");
+                        } else {
+                            webView.loadUrl("about:blank");
+                        }
                     }
                 });
             }
