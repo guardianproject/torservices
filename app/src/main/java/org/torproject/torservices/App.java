@@ -44,6 +44,9 @@ public class App extends Application {
                 new ServiceConnection() {
                     @Override
                     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                        if (!(iBinder instanceof TorService.LocalBinder)) {
+                            return;
+                        }
                         torService = ((TorService.LocalBinder) iBinder).getService();
                         if (useForeground(torService)) {
                             startTorServiceForeground(torService);
