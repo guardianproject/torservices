@@ -2,6 +2,8 @@
 
     <Preference android:key="pref_about" />
 
+    <Preference android:key="pref_status" />
+
     <SwitchPreference
         android:defaultValue="true"
         android:key="pref_allow_background_starts"

@@ -1,11 +1,17 @@
 package org.torproject.torservices;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
+
+import net.freehaven.tor.control.TorControlCommands;
 
 import org.torproject.jni.TorService;
 
@@ -19,6 +25,9 @@ public class SettingsActivity extends Activity {
     static final String PREF_START_ON_BOOT = "pref_start_on_boot";
 
     public static class MySettingsFragment extends PreferenceFragment {
+
+        BroadcastReceiver broadcastReceiver;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -47,6 +56,22 @@ public class SettingsActivity extends Activity {
                 usePersistentNotification.setChecked(true);
                 usePersistentNotification.setEnabled(false);
             }
+            final Preference statusPreference = findPreference("pref_status");
+            broadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    String data = intent.getStringExtra(intent.getAction());
+                    statusPreference.setTitle(data);
+                }
+            };
+            App.localBroadcastManager.registerReceiver(broadcastReceiver,
+                    new IntentFilter(TorControlCommands.EVENT_CIRCUIT_STATUS));
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            App.localBroadcastManager.unregisterReceiver(broadcastReceiver);
         }
     }
 
