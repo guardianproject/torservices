@@ -51,6 +51,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    /*
+     These META-INF files are spammy, unneeded, and trigger big
+     warnings in `apksigner verify`.  Sadly, this does not work for
+     META-INF/com/android/build/gradle/app-metadata.properties, which
+     is hacked in using some special technique that packagingOptions
+     cannot affect.
+     */
+    packagingOptions {
+        exclude 'META-INF/*.version'
+    }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError true
