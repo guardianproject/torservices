@@ -31,6 +31,11 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.webkit.ProxyConfig;
+import androidx.webkit.ProxyController;
+
+import java.util.concurrent.Executor;
+
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 /**
@@ -70,8 +75,9 @@ public class MainActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        statusTextView.setText("Tor status: " + status);
+                        statusTextView.setText(status);
                         if (OrbotHelper.STATUS_ON.equals(status)) {
+                            setProxy();
                             webView.loadUrl("https://check.torproject.org/");
                         } else {
                             webView.loadUrl("about:blank");
@@ -90,6 +96,25 @@ public class MainActivity extends Activity {
 
         GenericWebViewClient webViewClient = new GenericWebViewClient(this);
         webView.setWebViewClient(webViewClient);
+        webView.loadUrl("https://check.torproject.org/");
+
+    }
+
+    private void setProxy() {
+        ProxyConfig proxyConfig = new ProxyConfig.Builder()
+                .addProxyRule("127.0.0.1:8118")
+                .addDirect().build();
+        ProxyController.getInstance().setProxyOverride(proxyConfig, new Executor() {
+            @Override
+            public void execute(Runnable command) {
+                //do nothing
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
     }
 
     @Override

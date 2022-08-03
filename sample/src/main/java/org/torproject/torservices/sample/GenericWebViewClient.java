@@ -53,6 +53,7 @@ class GenericWebViewClient extends WebViewClient {
         this.requestCounterListener = requestCounterListener;
     }
 
+    /**
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
 
@@ -99,5 +100,5 @@ class GenericWebViewClient extends WebViewClient {
         }
         // failed doing proxied http request: return empty response
         return new WebResourceResponse("text/plain", "UTF-8", 204, "No Content", new HashMap<String, String>(), new ByteArrayInputStream(new byte[]{}));
-    }
+    }**/
 }
