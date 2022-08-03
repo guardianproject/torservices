@@ -25,4 +25,7 @@
         </activity>
     </application>
 
+    <queries>
+        <package android:name="org.torproject.torservices" />
+    </queries>
 </manifest>
