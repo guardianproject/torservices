@@ -37,6 +37,7 @@ import androidx.webkit.ProxyController;
 import java.util.concurrent.Executor;
 
 import info.guardianproject.netcipher.proxy.OrbotHelper;
+import info.guardianproject.netcipher.proxy.StatusCallback;
 
 /**
  * A simple web page viewer that only loads the page when Tor is ready.
@@ -55,14 +56,61 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        webView = findViewById(R.id.webview);
         final TextView statusTextView = findViewById(R.id.status);
+
+        OrbotHelper.get(this).addStatusCallback(new StatusCallback() {
+            @Override
+            public void onEnabled(Intent statusIntent) {
+                setProxy();
+                webView.loadUrl("https://check.torproject.org/");
+            }
+
+            @Override
+            public void onStarting() {
+                statusTextView.setText("starting....");
+
+            }
+
+            @Override
+            public void onStopping() {
+                statusTextView.setText("stopping....");
+
+            }
+
+            @Override
+            public void onDisabled() {
+                statusTextView.setText("disable....");
+
+            }
+
+            @Override
+            public void onStatusTimeout() {
+                statusTextView.setText("timeout....");
+
+            }
+
+            @Override
+            public void onNotYetInstalled() {
+                statusTextView.setText("not installed....");
+
+            }
+        });
+
+        webView = findViewById(R.id.webview);
         findViewById(R.id.statusButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 webView.loadUrl("about:blank");
-                statusTextView.setText("...");
-                OrbotHelper.requestStartTor(getApplicationContext());
+                statusTextView.setText("loading...");
+                OrbotHelper.get(MainActivity.this).requestStartTor(getApplicationContext());
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setProxy();
+                        webView.loadUrl("https://check.torproject.org/");
+                    }
+                });
             }
         });
 
