@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 
 import org.torproject.jni.TorService;
 
@@ -83,11 +84,20 @@ public class App extends Application {
 
     public static Notification getNotification(Context context) {
         final String packageName = context.getPackageName();
-        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + packageName));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent exitIntent = PendingIntent.getActivity(context,
-                0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent exitIntent = null;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            exitIntent = PendingIntent.getActivity(context,
+                    0, intent, PendingIntent.FLAG_CANCEL_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+        }
+        else
+        {
+            exitIntent = PendingIntent.getActivity(context,
+                    0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, packageName)
                 .setContentTitle(context.getString(R.string.notification_title))

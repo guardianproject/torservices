@@ -65,4 +65,13 @@
 
     </application>
 
+    <queries>
+        <intent>
+            <action android:name="info.pluggabletransports.start" />
+        </intent>
+
+        <intent>
+            <action android:name="info.pluggabletransports.configure" />
+        </intent>
+    </queries>
 </manifest>

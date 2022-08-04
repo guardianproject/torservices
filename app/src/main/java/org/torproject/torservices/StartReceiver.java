@@ -5,12 +5,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
+
 import org.torproject.jni.TorService;
 
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import java.util.List;
+
 /**
  * Processes {@link Intent}s from apps that are requesting Tor proxying,
  * including replying to the apps when the user has disabled automatic
@@ -26,6 +33,8 @@ public class StartReceiver extends BroadcastReceiver {
      * this reply.  This matches the constant from Orbot and NetCipher.
      */
     private static final String STATUS_STARTS_DISABLED = "STARTS_DISABLED";
+
+    private static final String INTENT_ACTION_PT_START = "info.pluggabletransports.start";
 
     public static final void start(Context context) {
         Intent intent = new Intent(TorService.ACTION_START);
@@ -45,6 +54,10 @@ public class StartReceiver extends BroadcastReceiver {
                 if (packageName != null) {
                     startTorIntent.putExtra(TorService.EXTRA_PACKAGE_NAME, packageName);
                 }
+                String ptInfo = getPluggableTransports(context);
+                if (ptInfo != null)
+                    startPT(context,ptInfo);
+
                 if (App.useForeground(context)) {
                     ContextCompat.startForegroundService(context, startTorIntent);
                 } else {
@@ -58,5 +71,25 @@ public class StartReceiver extends BroadcastReceiver {
                 context.sendBroadcast(startsDisabledIntent);
             }
         }
+    }
+
+    private void startPT (Context context, String pkg) {
+        Intent ptIntent = new Intent(INTENT_ACTION_PT_START);
+        ptIntent.setPackage(pkg);
+        context.startService(ptIntent);
+    }
+
+
+    private String getPluggableTransports (Context context)
+    {
+        Intent intent = new Intent(INTENT_ACTION_PT_START);
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> resolveInfos = pm.queryIntentServices(intent, PackageManager.GET_RESOLVED_FILTER);
+        if(!resolveInfos.isEmpty()) {
+            ResolveInfo info = resolveInfos.get(0);
+            return info.serviceInfo.packageName;
+        }
+
+        return null;
     }
 }
