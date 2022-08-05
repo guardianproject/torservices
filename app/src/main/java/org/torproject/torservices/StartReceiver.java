@@ -4,6 +4,7 @@ package org.torproject.torservices;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -35,12 +36,16 @@ public class StartReceiver extends BroadcastReceiver {
     private static final String STATUS_STARTS_DISABLED = "STARTS_DISABLED";
 
     private static final String INTENT_ACTION_PT_START = "info.pluggabletransports.start";
+    private static final String INTENT_ACTION_PT_STATUS = "info.pluggabletransports.status";
+
 
     public static final void start(Context context) {
         Intent intent = new Intent(TorService.ACTION_START);
         intent.setClass(context, StartReceiver.class);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
+
+    private Intent lastStartTorIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -54,14 +59,19 @@ public class StartReceiver extends BroadcastReceiver {
                 if (packageName != null) {
                     startTorIntent.putExtra(TorService.EXTRA_PACKAGE_NAME, packageName);
                 }
-                String ptInfo = getPluggableTransports(context);
-                if (ptInfo != null)
-                    startPT(context,ptInfo);
+                PluggableTransport ptInfo = getPluggableTransports(context);
+                if (ptInfo != null) {
 
-                if (App.useForeground(context)) {
-                    ContextCompat.startForegroundService(context, startTorIntent);
-                } else {
-                    context.startService(startTorIntent);
+                    lastStartTorIntent = startTorIntent;
+                    //wait for status/port and then add pt connection info to TorService
+                    startPT(context, ptInfo.packageName);
+                }
+                else {
+                    if (App.useForeground(context)) {
+                        ContextCompat.startForegroundService(context, startTorIntent);
+                    } else {
+                        context.startService(startTorIntent);
+                    }
                 }
             } else if (!TextUtils.isEmpty(packageName)) {
                 // let the requesting app know that the user has disabled starting via Intent
@@ -71,25 +81,53 @@ public class StartReceiver extends BroadcastReceiver {
                 context.sendBroadcast(startsDisabledIntent);
             }
         }
+        else if (TextUtils.equals(action, INTENT_ACTION_PT_STATUS))
+        {
+
+            //got status from PT started, now added it TorService config and go!
+
+            String ptType = "snowflake";
+            int ptPort = 9090;
+
+            lastStartTorIntent.putExtra("pttype",ptType);
+            lastStartTorIntent.putExtra("ptport",ptPort);
+
+
+            if (App.useForeground(context)) {
+                ContextCompat.startForegroundService(context, lastStartTorIntent);
+            } else {
+                context.startService(lastStartTorIntent);
+            }
+        }
     }
 
     private void startPT (Context context, String pkg) {
         Intent ptIntent = new Intent(INTENT_ACTION_PT_START);
         ptIntent.setPackage(pkg);
-        context.startService(ptIntent);
+        ContextCompat.startForegroundService(context,ptIntent);
     }
 
 
-    private String getPluggableTransports (Context context)
+
+    private PluggableTransport getPluggableTransports (Context context)
     {
         Intent intent = new Intent(INTENT_ACTION_PT_START);
         PackageManager pm = context.getPackageManager();
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(intent, PackageManager.GET_RESOLVED_FILTER);
         if(!resolveInfos.isEmpty()) {
             ResolveInfo info = resolveInfos.get(0);
-            return info.serviceInfo.packageName;
+            PluggableTransport pt = new PluggableTransport();
+            pt.category = info.filter.getCategory(0);
+            pt.packageName = info.serviceInfo.packageName;
+            return pt;
         }
 
         return null;
+    }
+
+    class PluggableTransport
+    {
+        String category;
+        String packageName;
     }
 }

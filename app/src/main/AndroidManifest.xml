@@ -42,6 +42,9 @@
             <intent-filter>
                 <action android:name="org.torproject.android.intent.action.START" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="info.pluggabletransports.status" />
+            </intent-filter>
         </receiver>
 
         <receiver android:name=".OnBootReceiver"
