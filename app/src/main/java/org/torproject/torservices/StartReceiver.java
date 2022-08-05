@@ -45,7 +45,7 @@ public class StartReceiver extends BroadcastReceiver {
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
-    private Intent lastStartTorIntent;
+    private static Intent lastStartTorIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -104,6 +104,7 @@ public class StartReceiver extends BroadcastReceiver {
     private void startPT (Context context, String pkg) {
         Intent ptIntent = new Intent(INTENT_ACTION_PT_START);
         ptIntent.setPackage(pkg);
+        ptIntent.putExtra("xtrpkg",context.getPackageName());
         ContextCompat.startForegroundService(context,ptIntent);
     }
 
