@@ -111,7 +111,7 @@ android.applicationVariants.all { variant ->
 
 dependencies {
     api 'info.guardianproject:jtorctl:0.4.5.7'
-    implementation 'info.guardianproject:tor-android:0.4.7.10'
+    implementation 'info.guardianproject:tor-android:0.4.7.11'
     implementation 'androidx.core:core:1.8.0'
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
     testImplementation 'junit:junit:4.13.2'
