@@ -1,0 +1,3 @@
+* Update to Tor v0.4.7.14
+
+* Quick hack to show Tor status messages in a line in the Settings
