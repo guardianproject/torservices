@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
+    buildToolsVersion "33.0.2"
 
     defaultConfig {
         applicationId "org.torproject.torservices.sample"
@@ -19,7 +20,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation "androidx.webkit:webkit:1.4.0"
 
     implementation 'info.guardianproject.netcipher:netcipher:2.2.0-alpha'
