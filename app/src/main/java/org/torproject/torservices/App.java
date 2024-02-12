@@ -87,7 +87,7 @@ public class App extends Application {
         intent.setData(Uri.parse("package:" + packageName));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent exitIntent = PendingIntent.getActivity(context,
-                0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, packageName)
                 .setContentTitle(context.getString(R.string.notification_title))
