@@ -1,9 +1,12 @@
 package org.torproject.torservices;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
@@ -53,9 +56,20 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestNotificationPermission();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(android.R.id.content, new MySettingsFragment())
                 .commit();
+    }
+
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+                    // nothing to do here, we just ignore if the permission wasn't granted
+                }).launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 }
