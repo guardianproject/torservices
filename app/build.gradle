@@ -11,8 +11,8 @@ def getVersionName = { ->
 }
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 33
+    buildToolsVersion "33.0.2"
 
     defaultConfig {
         applicationId "org.torproject.torservices"
@@ -49,6 +49,17 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /*
+     These META-INF files are spammy, unneeded, and trigger big
+     warnings in `apksigner verify`.  Sadly, this does not work for
+     META-INF/com/android/build/gradle/app-metadata.properties, which
+     is hacked in using some special technique that packagingOptions
+     cannot affect.
+     */
+    packagingOptions {
+        exclude 'META-INF/*.version'
     }
 
     lintOptions {
@@ -111,7 +122,7 @@ android.applicationVariants.all { variant ->
 
 dependencies {
     api 'info.guardianproject:jtorctl:0.4.5.7'
-    implementation 'info.guardianproject:tor-android:0.4.7.11'
+    implementation 'info.guardianproject:tor-android:0.4.7.14'
     implementation 'androidx.core:core:1.8.0'
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
     testImplementation 'junit:junit:4.13.2'
