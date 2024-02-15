@@ -70,7 +70,7 @@ public class App extends Application {
 
     public static void startTorServiceForeground(Context context) {
         if (torService != null) {
-            torService.startForeground(0xc0feefee, getNotification(torService));
+            torService.startForeground(0xc0feefee, buildNotification(torService));
         }
     }
 
@@ -82,7 +82,10 @@ public class App extends Application {
         return prefs.getBoolean(SettingsActivity.PREF_USE_PERSISTENT_NOTIFICATIONS, false);
     }
 
-    public static Notification getNotification(Context context) {
+    /**
+     * Instantiate Notification object for this apps foreground service.
+     */
+    public static Notification buildNotification(Context context) {
         final String packageName = context.getPackageName();
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + packageName));
