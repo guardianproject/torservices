@@ -19,3 +19,14 @@ APK.  It is also possible to build per-ABI APKs:
 # or set it in the properties
 echo abi-splits=true >> gradle.properties
 ```
+
+### dependency updates
+
+This project uses gradles dependency verification feature. So whenever a
+dependency is changed developers must to run:
+
+```
+./gradlew --write-verification-metadata pgp,sha256
+```
+
+This will update the checksums in `gradle/verification-metadata.xml`.
