@@ -12,78 +12,78 @@
         android:paddingRight="24dp">
 
         <TextView
-            style="@android:style/TextAppearance.Material.Caption"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/about_version" />
 
         <TextView
             android:id="@+id/version"
-            style="@android:style/TextAppearance.Material.Body1"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/unknown" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Caption"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/tor_version" />
 
         <TextView
             android:id="@+id/tor_version"
-            style="@android:style/TextAppearance.Material.Body1"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/unknown" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Caption"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/jtorctl_version" />
 
         <TextView
             android:id="@+id/jtorctl_version"
-            style="@android:style/TextAppearance.Material.Body1"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/unknown" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Caption"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/about_site" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Body1"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:autoLink="web"
             android:text="@string/site_link" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Caption"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/about_source" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Body1"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:autoLink="web"
             android:text="@string/source_link" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Caption"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/about_license" />
 
         <TextView
-            style="@android:style/TextAppearance.Material.Body1"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/license_gplv3_later" />
@@ -99,7 +99,7 @@
 
             <Button
                 android:id="@+id/ok_button"
-                style="@android:style/Widget.Material.ActionButton"
+                style="@style/Widget.AppCompat.ActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="100dp"
