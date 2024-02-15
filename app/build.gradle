@@ -16,9 +16,9 @@ android {
 
     defaultConfig {
         applicationId "org.torproject.torservices"
-        minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 2000
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 2010
         versionName getVersionName()
         archivesBaseName = "TorServices-$versionName"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
