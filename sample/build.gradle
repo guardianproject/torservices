@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "org.torproject.torservices.sample"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -21,7 +21,7 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation "androidx.webkit:webkit:1.4.0"
+    implementation "androidx.webkit:webkit:1.7.0"
 
     implementation 'info.guardianproject.netcipher:netcipher:2.2.0-alpha'
 
