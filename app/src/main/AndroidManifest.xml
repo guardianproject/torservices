@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- Some Chromebooks don't support touch. Although not essential,
@@ -20,9 +21,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".SettingsActivity"
+            android:theme="@style/Theme.AppCompat"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +33,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity" />
+        <activity android:name=".AboutActivity"
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".WakeUpActivity"
+            android:theme="@style/Theme.AppCompat"
             android:exported="true" />
 
         <receiver

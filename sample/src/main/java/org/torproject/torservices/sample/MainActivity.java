@@ -16,7 +16,6 @@
 
 package org.torproject.torservices.sample;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +34,7 @@ import androidx.webkit.ProxyConfig;
 import androidx.webkit.ProxyController;
 
 import java.util.concurrent.Executor;
+import androidx.appcompat.app.AppCompatActivity;
 
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 import info.guardianproject.netcipher.proxy.StatusCallback;
@@ -42,7 +42,7 @@ import info.guardianproject.netcipher.proxy.StatusCallback;
 /**
  * A simple web page viewer that only loads the page when Tor is ready.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 

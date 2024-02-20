@@ -16,9 +16,9 @@ android {
 
     defaultConfig {
         applicationId "org.torproject.torservices"
-        minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 2000
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 2010
         versionName getVersionName()
         archivesBaseName = "TorServices-$versionName"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -123,12 +123,12 @@ android.applicationVariants.all { variant ->
 dependencies {
     api 'info.guardianproject:jtorctl:0.4.5.7'
     implementation 'info.guardianproject:tor-android:0.4.7.14'
-    implementation 'androidx.core:core:1.8.0'
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
+    implementation 'androidx.preference:preference:1.2.1'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:core:1.4.0'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
     androidTestImplementation 'commons-io:commons-io:2.11.0'
     androidTestImplementation 'commons-net:commons-net:3.6'
 }

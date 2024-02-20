@@ -1,14 +1,16 @@
 package org.torproject.torservices;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.torproject.jni.TorService;
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends AppCompatActivity {
     public static final String TAG = "AboutActivity";
 
     @Override
