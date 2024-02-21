@@ -23,7 +23,7 @@ echo abi-splits=true >> gradle.properties
 ### dependency updates
 
 This project uses gradles dependency verification feature. So whenever a
-dependency is changed developers must to run:
+dependency is changed developers must run:
 
 ```
 ./gradlew --write-verification-metadata pgp,sha256
